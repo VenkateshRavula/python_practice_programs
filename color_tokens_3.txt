@@ -1,0 +1,23 @@
+Abcd 1.2.3.4 ww rr tt 22.33.10.1
+
+
+=====
+import re
+
+
+def get_ip(ip_address):
+  f = open("file1.txt", "r")
+  file_data = f.read()
+
+  ip_pattern = ((25[0-5] | 2[0-4][0-9] | [01]?[0-9][0-9]?)\.(25[0-5] | 2[0-4][0-9] | [01]?[0-9][0-9]?)\.(25[0-5] | 2[0-4][0-9] | [01]?[0-9][0-9]?)\.(25[0-5] | 2[0-4][0-9] | [01]?[0-9][0-9]?))
+  all_ips = re.findall(ip_pattern, file_data)
+
+  data={}
+  for ip in all_ips:
+    if data.get(ip):
+      data[ip] = data.get(ip) + 1
+    else:
+      data[ip] = 1
+
+  # retrieving user requested data
+  return data.get(ip_address, None)

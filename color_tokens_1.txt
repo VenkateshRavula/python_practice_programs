@@ -1,0 +1,46 @@
+list1 = [1, "abc", 2]
+tup1 = (2,3,4)
+
+
+dict1 = {
+  "name": "venkat",
+  "company": "hpe"
+  }
+  
+dict1['name']
+dict1.get('name', None)
+d2 = {"name": "newname")
+
+d1.update(d2)
+dict1.keys()
+
+str1 = "venkat"
+str[::-1]
+
+list1 = [20, 3, 15, 7, 8]
+sum = 0
+for elem in list1:
+    sum += elem
+print(sum)
+
+list1[-1]
+
+min = list1.sort()[0]
+
+
+polymorphism:
+
+class A:
+  def test(self):
+    print("test")
+
+class B(A):
+  def test(self):
+    print("test-B")
+
+
+f = lambda k, l: k + l
+f(10, 2)
+
+import re
+re.match("^.*", inp)

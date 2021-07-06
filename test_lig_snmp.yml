@@ -1,0 +1,72 @@
+  tasks:
+    # Below task creates a Logical Interconnect Group with Interconnects, InternalNetworks, upLinkPorts, uplinkSets containing EthernetNetworks
+    - name: Create a Logical Interconnect Group
+      oneview_logical_interconnect_group:
+        config: "{{ config }}"
+        state: present
+        data:
+          name: 'LIG_with_snmp_user'
+          enclosureType: 'SY12000'
+          uplinkSets: []
+          interconnectBaySet: 3
+          enclosureIndexes: [1,2,3]
+          snmpConfiguration:
+            type: snmp-configuration
+            snmpUsers:
+              - snmpV3UserName: lig-snmpuser
+                userCredentials: []
+            enabled: false
+            v3Enabled: true
+          redundancyType: "HighlyAvailable"
+          interconnectMapTemplate:
+            interconnectMapEntryTemplates:
+              - enclosureIndex: 3
+                logicalLocation:
+                    locationEntries:
+                        - relativeValue: 3
+                          type: "Enclosure"
+                        - relativeValue: 6
+                          type: "Bay"
+                permittedInterconnectTypeName: "{{ permitted_interconnect_type_name_2 }}"
+              - enclosureIndex: 2
+                logicalLocation:
+                    locationEntries:
+                        - relativeValue: 2
+                          type: "Enclosure"
+                        - relativeValue: 6
+                          type: "Bay"
+                permittedInterconnectTypeName: "{{ permitted_interconnect_type_name_1 }}"
+              - enclosureIndex: 2
+                logicalLocation:
+                    locationEntries:
+                        - relativeValue: 2
+                          type: "Enclosure"
+                        - relativeValue: 3
+                          type: "Bay"
+                permittedInterconnectTypeName: "{{ permitted_interconnect_type_name_2 }}"
+              - enclosureIndex: 3
+                logicalLocation:
+                    locationEntries:
+                        - relativeValue: 3
+                          type: "Enclosure"
+                        - relativeValue: 3
+                          type: "Bay"
+                permittedInterconnectTypeName: "{{ permitted_interconnect_type_name_2 }}"
+              - enclosureIndex: 1
+                logicalLocation:
+                    locationEntries:
+                        - relativeValue: 1
+                          type: "Enclosure"
+                        - relativeValue: 6
+                          type: "Bay"
+                permittedInterconnectTypeName: "{{ permitted_interconnect_type_name_2 }}"
+              - enclosureIndex: 1
+                logicalLocation:
+                    locationEntries:
+                        - relativeValue: 1
+                          type: "Enclosure"
+                        - relativeValue: 3
+                          type: "Bay"
+                permittedInterconnectTypeName: "{{ permitted_interconnect_type_name_1 }}"
+               # Alternatively you can inform permittedInterconnectTypeUri
+      delegate_to: localhost
